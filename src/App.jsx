@@ -1,22 +1,21 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import NavNavi from "./components/NavNavi";
-import Pokemons from "./views/SelectPokemons";
-import PokeDetails from "./views/PokeDetails";
-import Home from "./views/Home";
-import NotFound from "./views/NotFound";
-import SelectPokemons from "./views/SelectPokemons";
+import React from "react";
+import { ItemList } from "./components/ItemList";
 
-const App = () => {
+import { Navbar } from "./components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ShoppingCart } from "./components/ShoppingCart";
+import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
+
+export const App = () => {
   return (
-    <div>
-      <NavNavi />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/pokemons" element={<SelectPokemons />} />
-        <Route path="/pokemon/:name" element={<PokeDetails />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <ShoppingCartProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<ItemList />} />
+          <Route path="/cart" element={<ShoppingCart />} />
+        </Routes>
+      </Router>
+    </ShoppingCartProvider>
   );
 };
-export default App;
